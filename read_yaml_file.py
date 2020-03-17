@@ -16,7 +16,7 @@ except Exception:
     import yaml
     yaml.warnings({'YAMLLoadWarning': False})
 
-def read_yaml_file(file):
+def read_file(file):
     with open(file,"r") as f:
         content = f.read().encode()
         yaml_content = yaml.load(content)
@@ -25,5 +25,5 @@ def read_yaml_file(file):
 
 
 if __name__ == '__main__':
-    result = read_yaml_file("config.yml")
+    result = read_file("config.yml")
     print(result)
