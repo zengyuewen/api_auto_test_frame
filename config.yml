@@ -1,1 +1,8 @@
-url:  http://localhost
+# 登录url
+login_info:
+  login_url: http://localhost/api/mgr/loginReq
+  username: auto
+  password: sdfsdfsdf
+
+# 课程url
+course_url:  http://localhost/api/mgr/sq_mgr/
