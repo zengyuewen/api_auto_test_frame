@@ -7,6 +7,7 @@ Date:2020/3/17 22:52
 Desc:
 """
 import os
+import time
 import requests
 from pprint import pprint
 from read_yaml_file import read_file
@@ -33,11 +34,13 @@ class courseMrg():
             "pagenum":pagenum,
             "pagesize":pagesize
         }
-        response = requests.get(self.url,params=params)
-        response_result = response.json()
-        pprint(response_result)
-
-        return response_result
+        try:
+            response = requests.get(self.url,params=params)
+            response_result = response.json()
+            # pprint(response_result)
+            return response_result
+        except Exception:
+            return {"retcode": 1000, "reason": "出现异常"}
 
     # add course
     def add_course(self, course_name, course_des, course_rank):
@@ -58,11 +61,13 @@ class courseMrg():
                 "desc": "{course_des}",
                 "display_idx": {course_rank}}}"""
             }
-        response = requests.post(self.url, headers=headers,data=payload)
-        response_result = response.json()
-        pprint(response_result)
-
-        return response_result
+        try:
+            response = requests.post(self.url, headers=headers,data=payload)
+            response_result = response.json()
+            # pprint(response_result)
+            return response_result
+        except Exception:
+            return {"retcode": 1000, "reason": "出现异常"}
 
     # add course json
     def add_course_json(self, course_name, course_des, course_rank):
@@ -84,13 +89,14 @@ class courseMrg():
                   "display_idx":f"{course_rank}"
             }
         }
-        # pprint(type(payload))
-        # url =  r'http://localhost/apijson/mgr/sq_mgr/'
-        response = requests.post(self.url.replace("api","apijson"), headers=headers, json=payload)
-        response_result = response.json()
-        pprint(response_result)
+        try:
+            response = requests.post(self.url.replace("api","apijson"), headers=headers, json=payload)
+            response_result = response.json()
+            # pprint(response_result)
+            return response_result
+        except Exception:
+            return {"retcode": 1000, "reason": "出现异常"}
 
-        return response_result
     # modify course
     def modify_course(self,course_name, course_des, course_rank,course_id):
         """
@@ -112,11 +118,13 @@ class courseMrg():
                         "desc": "{course_des}",
                         "display_idx": {course_rank}}}"""
         }
-        response = requests.put(self.url, headers=headers, data=payload)
-        response_result = response.json()
-        pprint(response_result)
-
-        return response_result
+        try:
+            response = requests.put(self.url, headers=headers, data=payload)
+            response_result = response.json()
+            # pprint(response_result)
+            return response_result
+        except Exception:
+            return {"retcode": 1000, "reason": "出现异常"}
 
     # delete course
     def delete_course(self, course_id):
@@ -132,16 +140,32 @@ class courseMrg():
             "action": "delete_course",
             "id": course_id,
         }
-        response = requests.delete(self.url, headers=headers, data=payload)
-        response_result = response.json()
-        pprint(response_result)
+        try:
+            response = requests.delete(self.url, headers=headers, data=payload)
+            response_result = response.json()
+            # pprint(response_result)
+            return response_result
+        except Exception:
+            return {"retcode": 1000, "reason": "出现异常"}
 
-        return response_result
+    # 删除所有课程
+    def delete_all_course(self):
+        while True:
+            list_course = self.list_courses()
+            if len(list_course["retlist"]) == 0:
+                print("课程已清空")
+                break
+            for one in list_course["retlist"]:
+                # print(one['id'])
+                self.delete_course(one["id"])
+                time.sleep(0.5)
+
 
 def main():
     cm = courseMrg()
+    cm.delete_all_course()
     list_ret = cm.list_courses()
-    cm.add_course("初中数学012","数学描述",1)
+    # cm.add_course("abcd","abcde",2)
     # cm.add_course_json("abcd","abcde",2)
 
     # for one in list_ret["retlist"]:
