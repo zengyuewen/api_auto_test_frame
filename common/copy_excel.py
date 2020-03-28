@@ -29,13 +29,10 @@ def copy_excel(excel_path):
 
 if __name__ == '__main__':
     # print(excel_file_path)
-    import os
-
     save_path = os.path.dirname(
         os.path.dirname(__file__)) + r"/report/testCase.xls"
     new_workbook = copy_excel(excel_file_path)
     work_sheet = new_workbook.get_sheet(0)
-    work_sheet.write(1, 7, "PASS")
-    new_workbook.save(save_path)
+
 
 

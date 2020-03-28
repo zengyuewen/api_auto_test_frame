@@ -9,10 +9,8 @@ Desc:
 import xlrd
 import os
 from pprint import pprint
+from global_params import data_path
 
-# 读取Excel文件所在路径
-excel_file_path =  os.path.dirname(
-                  os.path.dirname(__file__)) + r"/data/testCase1.xls"
 
 def get_data_list(file):
     """
@@ -26,7 +24,6 @@ def get_data_list(file):
     table = data.sheet_by_index(0)
     # 获取表中的行数
     my_rows = table.nrows
-    # print(my_rows)
     data_list = []    # 用来存放Excel中的用例数据，
                       # 每行作为一个列表，在组成一个大大列表
     for one in range(1,my_rows):
@@ -35,5 +32,5 @@ def get_data_list(file):
     return data_list
 
 if __name__ == '__main__':
-    data_list = get_data_list(excel_file_path)
+    data_list = get_data_list(data_path)
     # pprint(data_list)

@@ -9,8 +9,10 @@ Desc:
 import json
 import time
 import requests
-from common.read_excel import get_data_list,excel_file_path
+from common.read_excel import get_data_list
 from api_lib.courseMrg import courseMrg
+from global_params import data_path
+
 
 
 cm = courseMrg()
@@ -25,7 +27,10 @@ def sendCourseRequest(row):
         excel_data = json.loads(row[5])
         random_num = str(int(time.time()) * 10000)
         time.sleep(1)
-        course_name = excel_data["name"].replace("{{onoce}}",random_num)
+        if "{{onoce}}" in excel_data["name"]:
+            course_name = excel_data["name"].replace("{{onoce}}",random_num)
+        else:
+            course_name = excel_data["name"]
         response_ret = cm.add_course(course_name,excel_data["desc"],excel_data["display_idx"])
         return  response_ret
     elif row[4] == "delete":
@@ -39,7 +44,7 @@ def sendCourseRequest(row):
 
 
 if __name__ == '__main__':
-    data_list = get_data_list(excel_file_path)
+    data_list = get_data_list(data_path)
     # print(data_list)
     for one in range(1,len(data_list)):
         sendCourseRequest(data_list[one])

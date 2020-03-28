@@ -1,0 +1,4 @@
+2020-03-25 20:59:45,383 - root - INFO - 方法：list_courses 开始运行
+2020-03-25 20:59:45,383 - root - INFO - the params = {'action': 'list_course', 'pagenum': 1, 'pagesize': 20}
+2020-03-25 20:59:47,957 - root - INFO - 方法：list_courses 请求成功
+2020-03-25 20:59:47,957 - root - INFO - 响应内容是：{'retcode': 0, 'retlist': [], 'total': 0}, 耗时2.5743086338043213

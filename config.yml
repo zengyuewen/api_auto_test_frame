@@ -6,3 +6,6 @@ login_info:
 
 # 课程url
 course_url:  http://localhost/api/mgr/sq_mgr/
+
+# 项目路径
+prj_path:  H:/api_auto_test_frame

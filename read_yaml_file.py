@@ -17,8 +17,8 @@ except Exception:
     yaml.warnings({'YAMLLoadWarning': False})
 
 def read_file(file):
-    with open(file,"r") as f:
-        content = f.read().encode()
+    with open(file,"rb") as f:
+        content = f.read()
         yaml_content = yaml.load(content)
         # print(web_elements)
         return yaml_content

@@ -14,17 +14,15 @@ class UnittestDemo(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print("cls的SetUp方法运行了\r\n")
-
     def setUp(self):
-        print("SetUp方法运行了\n")
+        print("SetUp方法运行了\r\n")
 
     # 清除初始化
     @classmethod
     def tearDownClass(cls):
         print("cls的tearDown方法运行了\r\n")
-
     def tearDown(self):
-        print("tearDown方法运行了\n")
+        print("tearDown方法运行了\r\n")
 
     # 测试用例
     def test_001(self):

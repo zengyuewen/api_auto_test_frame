@@ -1,0 +1,4 @@
+2020-03-24 23:38:23,304 - root - INFO - ####开始调用登录接口##########
+2020-03-24 23:38:23,304 - root - INFO - the headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+2020-03-24 23:38:23,305 - root - INFO - the body = {'username': 'auto', 'password': 'sdfsdfsdf'}
+2020-03-24 23:38:27,215 - root - INFO - response result is {'retcode': 0}, spend time 3.9107730388641357

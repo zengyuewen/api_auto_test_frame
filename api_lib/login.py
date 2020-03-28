@@ -6,18 +6,18 @@ Email：1004324878@qq.com
 Date:2020/3/20 21:37
 Desc:
 """
-import os
 import requests
+import time
 from pprint import pprint
-from read_yaml_file import read_file
+from global_params import yaml_content
+from common.log import Log
 
 
-# 返回当前文件的上级目录的上级目录
-config_path = os.path.dirname(os.path.dirname(__file__)) + r"/config.yml"
-login_info = read_file(config_path)["login_info"]
+login_info = yaml_content["login_info"]
 url = login_info["login_url"]
 username = login_info["username"]
 password = login_info["password"]
+logger = Log()
 
 
 def login_system(username,password):
@@ -27,17 +27,22 @@ def login_system(username,password):
     :param password: 密码
     :return:
     """
+    t1 = time.time()
+    logger.info("开始调用登录接口".center(50,"#"))
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     }
+    logger.info(f"the headers = {headers}")
     payload = {
         "username":username,
         "password":password
     }
+    logger.info(f"the body = {payload}")
     response = requests.post(url,headers=headers,data=payload)
     response_result = response.json()
-    pprint(response_result)
-
+    # pprint(response_result)
+    logger.info(f"response result is {response_result}, spend time {time.time() - t1}")
+    logger.info("login success".center(50,"#"))
     return response_result
 
 def main():

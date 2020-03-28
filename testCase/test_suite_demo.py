@@ -39,12 +39,11 @@ discover = unittest.defaultTestLoader.discover(test_path, pattern="unit*.py")
 # 方法二，使用HTMLTestRunner导出报告
 time_params = time.strftime("%Y%m%d%H%M%S",time.strptime(time.ctime()))
 report_path = os.path.dirname(os.path.dirname(__file__))  + rf"/report/testReport{time_params}.html"
-report_file = open(report_path,"wb")
-runner = HTMLTestRunner(title="接口自动化测试报告",
-                        tester="awen",
-                        description="自动执行",
-                        stream=report_file,
-                        verbosity=1)
-runner.run(discover)
-report_file.close()
+
+with open(report_path,"wb") as report_file:
+    runner = HTMLTestRunner(title="接口自动化测试报告",
+                            description="自动执行",
+                            stream=report_file,
+                            verbosity=2)
+    runner.run(discover)
 
